@@ -6,8 +6,12 @@ var playerName = window.prompt("What is your robot's name?");
 // You can also log multiple values at once like this console.log(playerName, playerAttack, playerHealth);
 
 var enemyNames = ["Roborto","Amy Android","Robo Trumble"];
-var enemyHealth = 50;
-var enemyAttack = 12;
+
+var randomNumber = function(min, max){
+    var value = Math.floor(Math.random()*(max - min + 1) + min);
+    return value;
+};
+
 
 //console.log(enemyNames);
 //console.log(enemyNames.length);
@@ -34,13 +38,15 @@ var fight = function (enemyName){
     if(confirmSkip){
         window.alert(playerName + "has decided to skip this fight. Goodbye!");
     // subtract money from the playerMoney for skipping 
-    playerMoney = playerMoney - 10;
+    playerMoney = math.max(0, playerMoney - 10);
     console.log("playerMoney", playerMoney)
     break;
     }
 }
-    //subtract the value of 'playerAttack' from the value of the 'enemyHealth' and use that result to up date the value in the 'enemy Health' variable 
-    enemyHealth = enemyHealth - playerAttack;
+    //subtract the value of 'playerAttack' from the value of the 'enemyHealth' and use that result to up date the value in the 'enemy Health' variable
+    var damage = randomNumber(playerAttack - 3, playerAttack);
+
+    enemyHealth = Math.max(0, enemyHealth - playerAttack);
     
     //Log a resulting message to the console so we know that it worked.
     console.log(
@@ -60,7 +66,9 @@ if (enemyHealth <= 0){
     }
 
     //Subtract the value of 'enemyAttack' from the value of 'playerHealth' and use that result to update the value in the 'playerHealth' variable.
-playerHealth = playerHealth - enemyAttack;
+ var damage = randomNumber(enemyAttack - 3, enemyAttack);
+     
+    enemyHealth = Math.max(0, enemyHealth - damage);
 
 //Log a resulting message to the console so we know that it worked.
 console.log(
@@ -89,7 +97,7 @@ window.alert('Welcome to Robot Gladiators! Round ' + (i + 1));
 // new enemy is pick based on index of enemyNAmes array
     var pickedEnemyName = enemyNames[i];
     //starting health
-    enemyHealth = 50;
+    enemyHealth = randomNumber(40,60);
     //debugger to check whats going on
     fight(pickedEnemyName);
     // if we're not at the last enemy in the array
